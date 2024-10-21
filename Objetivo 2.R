@@ -483,11 +483,81 @@ set.seed(1234)
 
 kmeansPunDes <- kmeans(PunDesEst , 4, iter.max = 1000, nstart = 10)
 fviz_cluster(kmeansPunDes,Datos[,c(29:73)],geom = c("point"))
-
+Datos$clusterdes <- kmeansPunDes$cluster
 kmeansPunDes$centers; tapply(PunDesEst, kmeansPunDes$cluster, summary)
 
 tapply(PunDesEst, kmeansPunDes$cluster, function(x){c(min(x),max(x))})
 
 kmeansPunDesH <- kmeans(PuntajesHunidos , 4, iter.max = 1000, nstart = 10)
+Datos$clusterdesH <- kmeansPunDesH$cluster
 fviz_cluster(kmeansPunDesH,Datos[,c(29:73)],geom = c("point"))
 tapply(PuntajesHunidos, kmeansPunDesH$cluster, function(x){c(min(x),max(x))})
+
+
+####
+
+#ACP
+df_cap_nin <- Datos[Datos$dif_cap_acp == "Ninguna", ]
+xtable(data.frame(df_cap_nin %>%
+  group_by(dif_des_acp) %>%
+  summarise(
+    Minimo_Puntaje = min(PuntajesACPunidosDes, na.rm = TRUE),
+    Maximo_Puntaje = max(PuntajesACPunidosDes, na.rm = TRUE)
+  )))
+
+df_cap_lev <- Datos[Datos$dif_cap_acp == "Leve", ]
+xtable(data.frame(df_cap_lev %>%
+  group_by(dif_des_acp) %>%
+  summarise(
+    Minimo_Puntaje = min(PuntajesACPunidosDes, na.rm = TRUE),
+    Maximo_Puntaje = max(PuntajesACPunidosDes, na.rm = TRUE)
+  )))
+
+df_cap_mod <- Datos[Datos$dif_cap_acp == "Moderada", ]
+xtable(data.frame(df_cap_mod %>%
+  group_by(dif_des_acp) %>%
+  summarise(
+    Minimo_Puntaje = min(PuntajesACPunidosDes, na.rm = TRUE),
+    Maximo_Puntaje = max(PuntajesACPunidosDes, na.rm = TRUE)
+  )))
+
+df_cap_sev <- Datos[Datos$dif_cap_acp == "Severa", ]
+xtable(data.frame(df_cap_sev %>%
+  group_by(dif_des_acp) %>%
+  summarise(
+    Minimo_Puntaje = min(PuntajesACPunidosDes, na.rm = TRUE),
+    Maximo_Puntaje = max(PuntajesACPunidosDes, na.rm = TRUE)
+  )))
+# HEURISTICO
+
+df_cap_nin_h <- Datos[Datos$dif_cap_heuris == "Ninguna", ]
+xtable(data.frame(df_cap_nin_h %>%
+  group_by(dif_des_heuris) %>%
+  summarise(
+    Minimo_Puntaje = min(PuntajesHunidosDes, na.rm = TRUE),
+    Maximo_Puntaje = max(PuntajesHunidosDes, na.rm = TRUE)
+  )))
+
+df_cap_lev_h <- Datos[Datos$dif_cap_heuris == "Leve", ]
+xtable(data.frame(df_cap_lev_h %>%
+  group_by(dif_des_heuris) %>%
+  summarise(
+    Minimo_Puntaje = min(PuntajesHunidosDes, na.rm = TRUE),
+    Maximo_Puntaje = max(PuntajesHunidosDes, na.rm = TRUE)
+  )))
+
+df_cap_mod_h <- Datos[Datos$dif_cap_heuris == "Moderada", ]
+xtable(data.frame(df_cap_mod_h %>%
+  group_by(dif_des_heuris) %>%
+  summarise(
+    Minimo_Puntaje = min(PuntajesHunidosDes, na.rm = TRUE),
+    Maximo_Puntaje = max(PuntajesHunidosDes, na.rm = TRUE)
+  )))
+
+df_cap_sev_h <- Datos[Datos$dif_cap_heuris == "Severa", ]
+xtable(data.frame(df_cap_sev_h %>%
+  group_by(dif_des_heuris) %>%
+  summarise(
+    Minimo_Puntaje = min(PuntajesHunidosDes, na.rm = TRUE),
+    Maximo_Puntaje = max(PuntajesHunidosDes, na.rm = TRUE)
+  )))

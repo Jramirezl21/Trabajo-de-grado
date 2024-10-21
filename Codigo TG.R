@@ -192,3 +192,7 @@ kmeansHeuris$centers; tapply( Puntaje_heuristico,
                               kmeansHeuris$cluster, summary)
 Datos$PunCapHeuris <- Puntaje_heuristico
 Datos$clustercapH <- kmeansHeuris$cluster
+
+
+sqrt(var(Datos$PunCapEst))
+sqrt(var(Datos$PunCapHeuris))

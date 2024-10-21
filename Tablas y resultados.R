@@ -192,3 +192,32 @@ hist(PuntajesHunidos ,main="Puntaje Heuristico",xlab="Puntaje Heuristico")
 legend(x = "topright",         # Posición
        legend = round(cor_spearmanobj2,3 ),title = "Cor Spearman",bty = "n") 
 xtable::xtable((table(kmeansPunDesH$cluster)/length(kmeansPunDesH$cluster))*100)
+###########
+
+
+conteo <- Datos %>%
+  group_by(dif_cap_acp, dif_des_acp) %>%
+  summarise(n = n()) %>%
+  ungroup()
+
+
+# Calcular el porcentaje para cada combinación dentro de cada nivel de capacidad
+resultado <- conteo %>%
+  group_by(dif_cap_acp) %>%
+  mutate(porcentaje = n / sum(n) * 100) %>%
+  ungroup()
+xtable(data.frame(resultado))
+
+
+conteo_H <- Datos %>%
+  group_by(dif_cap_heuris, dif_des_heuris) %>%
+  summarise(n = n()) %>%
+  ungroup()
+
+
+# Calcular el porcentaje para cada combinación dentro de cada nivel de capacidad
+resultado_H <- conteo_H %>%
+  group_by(dif_cap_heuris) %>%
+  mutate(porcentaje = n / sum(n) * 100) %>%
+  ungroup()
+xtable(data.frame(resultado_H))

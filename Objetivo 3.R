@@ -12,6 +12,12 @@ Datos$dif_cap_acp <- factor(Datos$clustercap, levels = c(1,4,2,3),
 Datos$dif_cap_heuris <- factor(Datos$clustercapH, levels = c(1,4,3,2),
                             labels = c("Ninguna", "Leve","Moderada","Severa"))
 
+Datos$dif_des_acp <- factor(Datos$clusterdes, levels = c(1,3,2,4),
+                            labels = c("Ninguna", "Leve","Moderada","Severa"))
+Datos$dif_des_heuris <- factor(Datos$clusterdesH, levels = c(4,1,3,2),
+                               labels = c("Ninguna", "Leve","Moderada","Severa"))
+
+
 ######################################################################################
 df_hombres <- subset(Datos, sexo == "Hombre")
 
